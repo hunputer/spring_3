@@ -25,6 +25,7 @@
       </li>
       <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberList">Member</a></li>
+      <li><a href="${pageContext.request.contextPath}/qna/qnaList">qna</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

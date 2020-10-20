@@ -21,7 +21,7 @@
 <c:import url="../template/header.jsp"></c:import>
   
 <div class="container">
-  <h3>Notice Select Page</h3>
+  <h3>qna Select page</h3>
   <h3 id="num">${dto.num}</h3>
   <h1>Title : ${dto.title}</h1>
   <h1>Writer : ${dto.writer}</h1>
@@ -34,13 +34,13 @@
 	$("#del").click(function(){
 		var num = $("#del").attr("title");
 		alert(num);
-		location.href="./noticeDelete?num="+num;
+		location.href="./qnaDelete?num="+num;
 	});
 	
 	$("#update").click(function(){
 		var num = $("#del").attr("title");
 		alert(num);
-		location.href="./noticeUpdate?num="+num;
+		location.href="./qnaUpdate?num="+num;
 	});
 </script>
 

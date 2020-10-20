@@ -24,19 +24,19 @@ public class NoticeDAOTest extends MyTestCase {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-//	@Test
-//	public void noticeInsertTest() throws Exception{
-//		for(int i = 0; i<100; i++) {
-//			NoticeDTO noticeDTO = new NoticeDTO();
-//			noticeDTO.setTitle("Title" +i);
-//			noticeDTO.setContents("Contents" + i);
-//			noticeDTO.setWriter("Writer" + i);
-//			int result = noticeDAO.noticeWrite(noticeDTO);
-//			
-//			if(i%10==0) {
-//				Thread.sleep(1000);
-//			}
-//		}
+	@Test
+	public void noticeInsertTest() throws Exception{
+		for(int i = 0; i<100; i++) {
+			NoticeDTO noticeDTO = new NoticeDTO();
+			noticeDTO.setTitle("Title" +i);
+			noticeDTO.setContents("Contents" + i);
+			noticeDTO.setWriter("Writer" + i);
+			int result = noticeDAO.noticeWrite(noticeDTO);
+			
+			if(i%10==0) {
+				Thread.sleep(1000);
+			}
+		}
 //	}
 //	
 //	@Test
