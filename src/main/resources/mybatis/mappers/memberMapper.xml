@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.choa.s3.member.MemberDAO">
+	<select id="noticeSelect" parameterType="java.lang.Long" resultType="com.choa.s3.notice.NoticeDTO">
+      select * from board where num = #{num}
+   </select>
+   
+   <select id="memberList" resultType="com.choa.s3.member.MemberDTO" parameterType="com.choa.s3.util.Pager">
+     select * from
+    (select rownum R, N.* from 
+    (select * from member_ch where
+    <choose>
+    	<when test="kind == 'tt'">
+    		id
+    	</when>
+    	<when test="kind == 'name'">
+    		name
+    	</when>
+    	<otherwise>
+    		email
+    	</otherwise>
+    </choose> 
+    like '%'||#{search}||'%' order by num desc) N)
+    where R between #{startRow} and #{lastRow}
+   </select>
+
+	<insert id="memberJoin" parameterType="com.choa.s3.member.MemberDTO">
+		insert into member_ch values (notice.nextval, #{id}, #{pw}, #{name}, #{email})
+	</insert>
+	
+	<select id="memberSelect" parameterType="java.lang.Long" resultType="com.choa.s3.member.MemberDTO">
+		select * from member_ch where num = #{num}
+	</select>
+	
+	<update id="memberUpdate" parameterType="com.choa.s3.member.MemberDTO">
+		update member_ch set pw = #{pw}, name = #{name}, email = #{email} where num = ${num}
+	</update>
+	
+	<delete id="memberDelete" parameterType="java.lang.Long">
+		delete member_ch where num = #{num}
+	</delete>
+	
+	<select id="memberCount" resultType="java.lang.Long" parameterType="com.choa.s3.util.Pager">
+        select count(num) from member_ch
+        where
+        <choose>
+    	<when test="kind == 'tt'">
+    		id
+    	</when>
+    	<when test="kind == 'name'">
+    		name
+    	</when>
+    	<otherwise>
+    		email
+    	</otherwise>
+    </choose> 
+    like '%'||#{search}||'%'
+   </select>
+</mapper>
