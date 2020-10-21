@@ -21,11 +21,11 @@ public class QnaDAOTest {
 	@Test
 	public void qnaReplyTest() throws Exception{
 		QnaDTO child = new QnaDTO();
-		child.setTitle("Test Reply Title 4");
-		child.setWriter("Test Writer Title 4");
-		child.setContents("Test Reply Contents 4");
+		child.setTitle("Test Reply Title 5");
+		child.setWriter("Test Writer Title 5");
+		child.setContents("Test Reply Contents 5");
 		
-		QnaDTO parent = qnaDAO.qnaSelect(106);
+		QnaDTO parent = qnaDAO.qnaSelect(308);
 		
 		//부모글의 정보로 답글에 정보를 입력
 		qnaDAO.qnaReplyUpdate(parent);

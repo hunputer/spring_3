@@ -13,6 +13,15 @@ public class QnaService {
 	@Autowired
 	private QnaDAO qnaDAO;
 	
+	public int qnaReply(QnaDTO qnaDTO) {
+		QnaDTO parent = qnaDAO.qnaSelect(qnaDTO.getNum());
+		int result = qnaDAO.qnaReplyUpdate(parent);
+		qnaDTO.setRef(parent.getRef());
+		qnaDTO.setStep(parent.getStep()+1);
+		qnaDTO.setDepth(parent.getDepth()+1);
+		return qnaDAO.qnaReply(qnaDTO);
+	}
+	
 	public List<QnaDTO> qnaList(Pager pager) {
 		pager.makeRow();
 		long total = qnaDAO.qnaCount(pager);

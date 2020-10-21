@@ -19,6 +19,25 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
+	@RequestMapping(value = "qnaReply" , method = RequestMethod.POST)
+	public ModelAndView qnaReply(QnaDTO qnaDTO) throws Exception{
+		int result = qnaService.qnaReply(qnaDTO);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("common/result");
+		mv.addObject("path", "./qnaList");
+		String message = "Reqly Write Fail";
+		if(result > 0) {
+			message = "Reply Write Success";
+		}
+		mv.addObject("msg", message);
+		return mv;
+	}
+	
+	@RequestMapping(value = "qnaReply")
+	public void qnaReply() throws Exception{
+		
+	}
+	
 	@RequestMapping(value="qnaList")
 	public ModelAndView qnaList(Pager pager) {
 		List<QnaDTO> ar = qnaService.qnaList(pager);
