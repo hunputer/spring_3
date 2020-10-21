@@ -7,7 +7,7 @@
 	<select id="qnaList" resultType="com.choa.s3.qna.QnaDTO" parameterType="com.choa.s3.util.Pager" >
 		select * from
     (select rownum R, N.* from 
-    (select * from board where
+    (select * from qna where
     <choose>
     	<when test="kind == 'tt'">
     		title
@@ -19,7 +19,7 @@
     		contents
     	</otherwise>
     </choose>
-     like '%'||#{search}||'%' order by num desc) N)
+     like '%'||#{search}||'%' order by ref desc, step asc) N)
     where R between #{startRow} and #{lastRow}
 	</select>
 	
@@ -53,7 +53,17 @@
 	</delete>
 	
 	<insert id="qnaWrite" parameterType="com.choa.s3.qna.QnaDTO">
-		insert into qna values (qna_seq.nextval, #{title}, #{writer}, #{contents},sysdate,0,0,0,0)
+		insert into qna values (qna_seq.nextval, #{title}, #{writer}, #{contents},sysdate,0,qna_seq.currval,0,0)
 	</insert>
+	
+	<update id="qnaReplyUpdate" parameterType="QnaDTO">
+		update qna set step=step+1 where ref=#{ref} and step>#{step}
+	</update>
+	
+	<insert id="qnaReply" parameterType="QnaDTO">
+		insert into qna values (qna_seq.nextval
+		, #{title}, #{writer}, #{contents}, sysdate, 0, #{ref}, #{step}, #{depth})
+	</insert>
+
 </mapper>
 

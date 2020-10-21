@@ -38,4 +38,12 @@ public class QnaDAO {
 	public long qnaCount(Pager pager) {
 		return sqlSession.selectOne(namespace+"qnaCount", pager);
 	}
+	
+	public int qnaReplyUpdate(QnaDTO qnaDTO) {
+		return sqlSession.update(namespace+"qnaReplyUpdate", qnaDTO);
+	}
+	
+	public int qnaReply(QnaDTO qnaDTO){
+		return sqlSession.insert(namespace+"qnaReply", qnaDTO);
+	}
 }
